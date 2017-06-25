@@ -12,14 +12,6 @@ window.onload=function(){
 
     retrieve();
 
-    // Array.prototype.swap=function(old_index,new_index){
-    //     let a=this[old_index];
-    //     this[old_index]=this[new_index];
-    //     this[new_index]=a;
-    // };
-
-
-
     delallBtn.onclick=function(){
               delAll();
     };
@@ -73,21 +65,22 @@ window.onload=function(){
        // console.log(itemindex==0 );
         if (itemindex==0 && itemindex!=(arr.length-1)){
            //console.log("hello")
+            downBtn.addEventListener("click",down);
            list.appendChild(downBtn)
        }
        else if(itemindex==(arr.length-1) && itemindex!=0){
-           list.appendChild(upBtn)
+            upBtn.addEventListener("click",up);
+            list.appendChild(upBtn)
        }
        else if(itemindex==(arr.length-1) && itemindex==0){
 
         }
        else{
-           list.appendChild(downBtn)
-           list.appendChild(upBtn)
+            downBtn.addEventListener("click",down);
+           list.appendChild(downBtn);
+            upBtn.addEventListener("click",up);
+           list.appendChild(upBtn);
        }
-
-       upBtn.addEventListener("click",up);
-       downBtn.addEventListener("click",down);
         list.appendChild(deleteBtn);
         unorderlist.appendChild(list);
     }
@@ -96,22 +89,32 @@ window.onload=function(){
     function up(event){
        let id=event.target.getAttribute("data-id-up");
        swap(arr,id,(id-1));
+       console.log(arr[id-1]);
        save(arr);
        ArraytoList(arr);
     }
 
-    function down(){
+
+    function down(event){
         let id=event.target.getAttribute("data-id-down");
-        console.log(id);
-        // swap(arr,id+1,id);
-        // save(arr);
+        // console.log(+id + 1);
+        // console.log(arr[1]);
+        // console.log(arr[id+1]);
+        swap(arr,(id),(+id + 1));
+        save(arr);
+        ArraytoList(arr);
     }
+
 
     function swap(arr,old_index,new_index){
         let a=arr[old_index];
+        console.log(a);
         arr[old_index]=arr[new_index];
+        console.log(arr[old_index]);
         arr[new_index]=a;
+        console.log(arr[new_index]);
     }
+
 
     function delbtn(event){
 
